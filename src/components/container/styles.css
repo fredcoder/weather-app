@@ -1,0 +1,75 @@
+p{
+    margin: 0;
+}
+
+.container {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.main{
+    margin-top: 10%;
+}
+
+.icon {
+    float: left;
+    text-align: right;
+    width: 50%;
+}
+.icon img{
+    width: 100px;
+}
+
+.date {
+    float: left;
+    text-align: left;
+    width: 50%;
+}
+.date #day{
+    margin: 0;
+    margin-top: 25px;
+    font-weight: bold;
+    font-size: 30px;
+}
+.date #date{
+    margin: 0;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.clearfix {
+    clear: both;
+    float: none;
+}
+
+.details{
+
+}
+.details #temp{
+    font-size: 100px;
+    margin: 0;
+}
+.details #degrees{
+    font-size: 40px;
+    position: relative;
+    top: -35px;
+}
+.details #feels{
+    font-size: 20px;
+    margin: 0px;
+    position: relative;
+    top: -10px;
+}
+.details #location{
+    font-size: 40px;
+    margin: 20px;
+}
+
+.property{
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    margin: 0 auto;
+    margin-bottom: 1px;
+    width: 90%;
+}
