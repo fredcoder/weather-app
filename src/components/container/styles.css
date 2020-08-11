@@ -62,7 +62,7 @@ p{
 }
 
 .main{
-    margin-top: 10%;
+    margin-top: 2.5em;
 }
 
 .icon {
@@ -96,25 +96,26 @@ p{
     float: none;
 }
 
-.details{
+.info{
 
 }
-.details #temp{
+.info #temp{
     font-size: 100px;
     margin: 0;
 }
-.details #degrees{
+.info #degrees{
     font-size: 40px;
     position: relative;
     top: -35px;
+    cursor: pointer;
 }
-.details #feels{
+.info #feels{
     font-size: 20px;
     margin: 0px;
     position: relative;
     top: -10px;
 }
-.details #location{
+.info #location{
     font-size: 40px;
     margin: 20px;
 }
@@ -150,6 +151,10 @@ p{
     padding: 10px 1px;
     float: left;
     overflow: hidden;
+}
+.day-property:hover{
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
 }
 .day-property img{
     margin: -12px;
