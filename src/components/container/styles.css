@@ -1,10 +1,64 @@
+body{
+    overflow: overlay;
+    height: 100%;
+    width: 100%;
+    text-shadow: 1px 1px 2px #48484A;
+}
+
 p{
     margin: 0;
+}
+
+#background{
+    /*background-image: url('../../assets/images/Thunderstorm.jpg');*/  
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+#filter{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 45%;
+}
+.d{
+    background-color: lightskyblue;
+}
+.n{
+    background-color: #000125;
+}
+
+.Thunderstorm{
+    background-image: url(https://media2.giphy.com/media/JUkpQbhE4rrXy/giphy.gif?cid=ecf05e4…&rid=giphy.gif);
+}
+.Clear{
+    background-image: url(https://media1.giphy.com/media/3o6wrm1JXSq5C9EtnG/giphy.gif?cid=ecf05e478644cb1b1d5bb69735b8c30a6174834c56296022&rid=giphy.gif);
+    /*https://upload.wikimedia.org/wikipedia/commons/7/77/Nuages.gif*/
+    /*url(https://cdn.lowgif.com/small/0d523d371d9c1860-sky-gif-loop-images.gif)*/
+}
+.Clouds{
+    background-image: url(https://media0.giphy.com/media/gk3s6G7AdUNkey0YpE/giphy.gif)
+}
+.Drizzle{
+    background-image: url(https://media2.giphy.com/media/26DMWExfbZSiV0Btm/giphy.gif?cid=ecf05e475a5a78dc093b1cbe8a2cf3ae20cbe517e992fb35&rid=giphy.gif);
+}
+.Rain{
+    background-image: url(https://media3.giphy.com/media/qHWAmPd3SWyY0/giphy.gif?cid=ecf05e472422fa73edabf2026a88bef89e88c45f1f8c68fe&rid=giphy.gif)
+}
+.Snow{
+    background-image: url(https://media0.giphy.com/media/FoVi0LDjy1XS8/giphy.gif);
+    /*background-image: url(https://media1.giphy.com/media/12wteMTXxjLaVO/giphy.gif);*/
 }
 
 .container {
     margin: 0 auto;
     text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: white;
 }
 
 .main{
@@ -21,7 +75,7 @@ p{
 }
 
 .date {
-    float: left;
+    float: right;
     text-align: left;
     width: 50%;
 }
@@ -67,9 +121,64 @@ p{
 
 .property{
     padding: 10px;
-    border: 1px solid lightgrey;
+    /*border: 1px solid lightgrey;*/
     border-radius: 5px;
     margin: 0 auto;
     margin-bottom: 1px;
     width: 90%;
+}
+
+.value{    
+    font-weight: bold;
+}
+
+.daily-forecast{
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 370px;
+}
+.daily-forecast #title{
+    margin: 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+.day-property{
+    width: 13.2%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    margin: 10px 1px;
+    padding: 10px 1px;
+    float: left;
+    overflow: hidden;
+}
+.day-property img{
+    margin: -12px;
+    width: 145%;
+}
+.day-property p{
+    font-size: small;
+}
+
+.hourly-forecast{    
+    margin: 0 auto;
+    margin: 40px 20px 20px 0;
+}
+.hourly-forecast #title{
+    margin: 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.hour-property{
+    background-color: rgba(255, 255, 255, 0.2);    
+    border-radius: 4px;
+    margin: 10px 1px;
+    padding: 10px 1px;   
+    float: left;
+}
+.hour-property img{
+    width: 40px;
+}
+.hour-property p{
+    font-size: small;
 }
