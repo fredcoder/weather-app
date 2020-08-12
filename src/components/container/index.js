@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getCurrentWeather } from '../../redux/actions/currentWeatherAction';
-import weatherImage from '../../assets/images/weather.jpg';
+import humidity from '../../assets/images/humidity.jpg';
+import visibility from '../../assets/images/visibility.png';
+import wind from '../../assets/images/wind.png';
+import pressure from '../../assets/images/pressure.png';
+import thunder from '../../assets/images/thunder.png';
 import SpinnerIcon from '../SpinnerIcon';
 import './styles.css';
 
@@ -12,7 +16,8 @@ class Container extends Component {
         latitude: "",
         longitude: "",
         measurement: "metric",
-        dateTime: ""
+        dateTime: "",
+        isNetworkOn: true
     }
 
     componentDidMount() {
@@ -94,10 +99,16 @@ class Container extends Component {
         }
     }
 
+    getNetwork = () => {
+        debugger;
+        setTimeout(function () {
+            this.setState({ isNetworkOn: false });
+        }.bind(this), 60000);
+    }
+
 
     render() {
         //debugger;
-        let measurement = this.state.measurement;
 
         let weather = this.props.current.weather[0];
         if (this.props.daily.length === 8) {
@@ -105,8 +116,15 @@ class Container extends Component {
         }
         if (this.props.info.lat === 0 && this.props.info.lon === 0) {
             return (
-                <div className="loading">
-                    <SpinnerIcon />
+                <div className="loading" onLoad={this.getNetwork()}>
+                    {this.state.isNetworkOn
+                        ?
+                        <SpinnerIcon />
+                        :
+                        <p className="error">
+                            <img className="error-icon" src={thunder} alt="thunder" />Unfortunately network is not available at the moment, please try later.
+                        </p>
+                    }
                 </div>)
         }
         else {
@@ -142,16 +160,24 @@ class Container extends Component {
                         </div>
                         <div className="details">
                             <div className="property">
-                                <p id="humidity">Humidity <span className="value">{this.props.current.humidity}%</span></p>
+                                <p id="humidity">
+                                    <img className="icons" src={humidity} alt="humidity" />Humidity <span className="value">{this.props.current.humidity}%</span>
+                                </p>
                             </div>
                             <div className="property">
-                                <p id="wind">Wind <span className="value">{this.props.current.wind_speed}{this.props.info.measurement === "metric" ? "m/s" : "mi/h"}</span></p>
+                                <p id="wind">
+                                    <img className="icons" src={wind} alt="wind" />Wind <span className="value">{this.props.current.wind_speed}{this.props.info.measurement === "metric" ? "m/s" : "mi/h"}</span>
+                                </p>
                             </div>
                             <div className="property">
-                                <p id="pressure">Pressure <span className="value">{this.props.current.pressure}hPa</span></p>
+                                <p id="pressure">
+                                    <img className="icons" src={pressure} alt="pressure" />Pressure <span className="value">{this.props.current.pressure}hPa</span>
+                                </p>
                             </div>
                             <div className="property">
-                                <p id="visibility">Visibility <span className="value">{(this.props.current.visibility / 1000 )}km</span></p>
+                                <p id="visibility">
+                                    <img className="icons" src={visibility} alt="visibility" />Visibility <span className="value">{(this.props.current.visibility / 1000)}km</span>
+                                </p>
                             </div>
                         </div>
                         <div className="daily-forecast">
