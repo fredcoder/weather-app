@@ -9,6 +9,13 @@ p{
     margin: 0;
 }
 
+.loading{
+    position: absolute;
+    background: black;
+    width: 100%;
+    height: 100%;
+}
+
 #background{
     /*background-image: url('../../assets/images/Thunderstorm.jpg');*/  
     background-size: cover;
@@ -31,25 +38,22 @@ p{
 }
 
 .Thunderstorm{
-    background-image: url(https://media2.giphy.com/media/JUkpQbhE4rrXy/giphy.gif?cid=ecf05e4…&rid=giphy.gif);
+    background-image: url('../../assets/gifs/Thunderstorm.webp');
 }
 .Clear{
-    background-image: url(https://media1.giphy.com/media/3o6wrm1JXSq5C9EtnG/giphy.gif?cid=ecf05e478644cb1b1d5bb69735b8c30a6174834c56296022&rid=giphy.gif);
-    /*https://upload.wikimedia.org/wikipedia/commons/7/77/Nuages.gif*/
-    /*url(https://cdn.lowgif.com/small/0d523d371d9c1860-sky-gif-loop-images.gif)*/
+    background-image: url('../../assets/gifs/Clear.gif');
 }
 .Clouds{
-    background-image: url(https://media0.giphy.com/media/gk3s6G7AdUNkey0YpE/giphy.gif)
+    background-image: url('../../assets/gifs/Clouds.gif');
 }
 .Drizzle{
-    background-image: url(https://media2.giphy.com/media/26DMWExfbZSiV0Btm/giphy.gif?cid=ecf05e475a5a78dc093b1cbe8a2cf3ae20cbe517e992fb35&rid=giphy.gif);
+    background-image: url('../../assets/gifs/Drizzle.gif');
 }
 .Rain{
-    background-image: url(https://media3.giphy.com/media/qHWAmPd3SWyY0/giphy.gif?cid=ecf05e472422fa73edabf2026a88bef89e88c45f1f8c68fe&rid=giphy.gif)
+    background-image: url('../../assets/gifs/Rain.webp');
 }
 .Snow{
-    background-image: url(https://media0.giphy.com/media/FoVi0LDjy1XS8/giphy.gif);
-    /*background-image: url(https://media1.giphy.com/media/12wteMTXxjLaVO/giphy.gif);*/
+    background-image: url('../../assets/gifs/Snow.webp');
 }
 
 .container {
@@ -73,6 +77,13 @@ p{
 .icon img{
     width: 100px;
 }
+.icon p{
+    margin-left: auto;
+    text-align: center;
+    margin-top: -34px;
+    margin-right: 8px;
+    width: 95px;
+}
 
 .date {
     float: right;
@@ -81,7 +92,7 @@ p{
 }
 .date #day{
     margin: 0;
-    margin-top: 25px;
+    margin-top: 31px;
     font-weight: bold;
     font-size: 30px;
 }
