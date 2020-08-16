@@ -55,22 +55,22 @@ body{
 }
 
 .Thunderstorm{
-    background-image: url('../../assets/gifs/Thunderstorm.webp');
+    background-image: url('../../assets/gifs/thunderstorm-light.gif');
 }
 .Clear{
     background-image: url('../../assets/gifs/Clear.gif');
 }
 .Clouds{
-    background-image: url('../../assets/gifs/Clouds.gif');
+    background-image: url('../../assets/gifs/Clear-night.gif');
 }
 .Drizzle{
     background-image: url('../../assets/gifs/Drizzle.gif');
 }
 .Rain{
-    background-image: url('../../assets/gifs/Rain.webp');
+    background-image: url('../../assets/gifs/Rain.gif');
 }
 .Snow{
-    background-image: url('../../assets/gifs/Snow.webp');
+    background-image: url('../../assets/gifs/snow.gif');
 }
 
 .container {
@@ -235,4 +235,19 @@ body{
 }
 .hour-property p{
     font-size: small;
+}
+
+.scroll-box{
+    width: 370px;
+    margin: 0 auto;
+    padding: 0;
+    overflow: overlay;
+    scroll-behavior: smooth;
+}
+.scroll-box::-webkit-scrollbar {
+    display: none;
+}
+.hourly-box{
+    height: 165px;
+    width: max-content;
 }

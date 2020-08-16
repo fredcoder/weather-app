@@ -122,7 +122,7 @@ class Container extends Component {
                         <SpinnerIcon />
                         :
                         <p className="error">
-                            <img className="error-icon" src={thunder} alt="thunder" />Unfortunately network is not available at the moment, please try later.
+                            <img className="error-icon" src={thunder} alt="thunder" />Unfortunately your geolocation can be detected at the moment, please enable the GPS or try later.
                         </p>
                     }
                 </div>)
@@ -166,7 +166,7 @@ class Container extends Component {
                             </div>
                             <div className="property">
                                 <p id="wind">
-                                    <img className="icons" src={wind} alt="wind" />Wind <span className="value">{this.props.current.wind_speed}{this.props.info.measurement === "metric" ? "m/s" : "mi/h"}</span>
+                                    <img className="icons" src={wind} alt="wind" />Wind speed <span className="value">{this.props.info.measurement === `metric` ? `${Math.round(this.props.current.wind_speed * 3.6)}k/h` : `${Math.round(this.props.current.wind_speed)}mi/h`}</span>
                                 </p>
                             </div>
                             <div className="property">
@@ -194,16 +194,20 @@ class Container extends Component {
                         </div>
                         <div className="clearfix">
                         </div>
-                        {/* <div className="hourly-forecast">
-                        <p id="title">Hourly Forecast</p>
-                        {this.props.hourlyForecast.map(hour =>
-                            <div key={hour.dt} className="hour-property">
-                                <p className="degrees">{Math.round(hour.temp)}°C</p>
-                                <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />
-                                <p className="time">{this.getTime(hour.dt)}</p>
+                        <div className="hourly-forecast">
+                            <p id="title">Hourly Forecast</p>
+                            <div className="scroll-box">
+                                <div className="hourly-box">
+                                    {this.props.hourly.map(hour =>
+                                        <div key={hour.dt} className="hour-property">
+                                            <p className="degrees">{Math.round(hour.temp)}°C</p>
+                                            <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />
+                                            <p className="time">{this.getTime(hour.dt)}</p>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                        )}
-                        </div>*/}
+                        </div>
                     </div>
                 </React.Fragment>
             );
