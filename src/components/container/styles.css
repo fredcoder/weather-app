@@ -61,7 +61,7 @@ body{
     background-image: url('../../assets/gifs/Clear.gif');
 }
 .Clouds{
-    background-image: url('../../assets/gifs/Clear-night.gif');
+    background-image: url('../../assets/gifs/Clouds.gif');
 }
 .Drizzle{
     background-image: url('../../assets/gifs/Drizzle.gif');
@@ -215,7 +215,7 @@ body{
 
 .hourly-forecast{    
     margin: 0 auto;
-    margin: 40px 20px 20px 0;
+    /*margin: 40px 20px 20px 0;*/
 }
 .hourly-forecast #title{
     margin: 0;
@@ -232,6 +232,7 @@ body{
 }
 .hour-property img{
     width: 40px;
+    filter: drop-shadow(0px 0px 4px whitesmoke);
 }
 .hour-property p{
     font-size: small;

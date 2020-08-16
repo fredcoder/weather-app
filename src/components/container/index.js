@@ -180,6 +180,20 @@ class Container extends Component {
                                 </p>
                             </div>
                         </div>
+                        <div className="hourly-forecast">
+                            <p id="title">Hourly Forecast</p>
+                            <div className="scroll-box">
+                                <div className="hourly-box">
+                                    {this.props.hourly.map(hour =>
+                                        <div key={hour.dt} className="hour-property">
+                                            <p className="time">{this.getTime(hour.dt)}</p>
+                                            <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />
+                                            <p className="degrees">{Math.round(hour.temp)}°</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                         <div className="daily-forecast">
                             <p id="title">Forecast</p>
                             {this.props.daily.length === 7 &&
@@ -193,20 +207,6 @@ class Container extends Component {
                                 )}
                         </div>
                         <div className="clearfix">
-                        </div>
-                        <div className="hourly-forecast">
-                            <p id="title">Hourly Forecast</p>
-                            <div className="scroll-box">
-                                <div className="hourly-box">
-                                    {this.props.hourly.map(hour =>
-                                        <div key={hour.dt} className="hour-property">
-                                            <p className="degrees">{Math.round(hour.temp)}°C</p>
-                                            <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />
-                                            <p className="time">{this.getTime(hour.dt)}</p>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </React.Fragment>
