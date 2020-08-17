@@ -129,10 +129,14 @@ class Container extends Component {
                 <div className="loading" onLoad={this.getNetwork()}>
                     {this.state.isNetworkOn
                         ?
-                        <SpinnerIcon />
+                        <p className="error">
+                            Geeting Geolocation.                            
+                            <SpinnerIcon />
+                            Please enable GPS.
+                        </p>
                         :
                         <p className="error">
-                            <img className="error-icon" src={thunder} alt="thunder" />Unfortunately your geolocation can be detected at the moment, please enable the GPS or try later.
+                            <img className="error-icon" src={thunder} alt="thunder" />Unfortunately Geolocation can not be detected at the moment.<br/>Please try later.
                         </p>
                     }
                 </div>)

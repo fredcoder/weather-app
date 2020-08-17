@@ -13,8 +13,9 @@ body{
     text-shadow: none;
     text-align: center;
     position: relative;
-    top: 30%;
+    top: 40%;
     margin: 20px;
+    font-size: x-large;
 }
 .error-icon{
     width: 50px;
@@ -256,5 +257,6 @@ p.title{
 
 .degrees-min{
     color: black;
-    text-shadow: 1px 1px 2px whitesmoke;
+    /*text-shadow: 1px 1px 2px whitesmoke;*/
+    text-shadow: 0px 0px 6px #f5f5f5, 0px 0px 15px white, 0px 0px 10px white;
 }
