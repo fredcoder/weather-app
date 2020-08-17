@@ -23,7 +23,17 @@ class Container extends Component {
     componentDidMount() {
         this.getDateTime();
         this.getGeolocation();
+        this.getUpdated();
     }
+
+    getUpdated = () => {
+        debugger;
+        setInterval(function () {
+            this.getDateTime();
+            this.getGeolocation();
+        }.bind(this), 300000);
+    }
+
 
     getGeolocation = () => {
         if (navigator.geolocation) {
@@ -181,13 +191,13 @@ class Container extends Component {
                             </div>
                         </div>
                         <div className="hourly-forecast">
-                            <p id="title">Hourly Forecast</p>
+                            <p className="title">Hourly Forecast</p>
                             <div className="scroll-box">
-                                <div className="hourly-box">
-                                    {this.props.hourly.map(hour =>
+                                <div id="hourly-box">
+                                    {this.props.hourly.slice(0, 24).map(hour =>
                                         <div key={hour.dt} className="hour-property">
                                             <p className="time">{this.getTime(hour.dt)}</p>
-                                            <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />
+                                            <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />                                            
                                             <p className="degrees">{Math.round(hour.temp)}°</p>
                                         </div>
                                     )}
@@ -195,7 +205,7 @@ class Container extends Component {
                             </div>
                         </div>
                         <div className="daily-forecast">
-                            <p id="title">Forecast</p>
+                            <p className="title">Daily Forecast</p>
                             {this.props.daily.length === 7 &&
                                 this.props.daily.map(day =>
                                     <div key={day.dt} className="day-property">

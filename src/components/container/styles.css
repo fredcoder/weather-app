@@ -14,14 +14,15 @@ body{
     text-align: center;
     position: relative;
     top: 30%;
+    margin: 20px;
 }
 .error-icon{
     width: 50px;
     height: 50px;
     filter: invert(1);
     position: absolute;
-    margin: 0 auto;
-    top: -55px;
+    margin: 0 auto;    
+    top: -65px;
     left: 0;
     right: 0;
 }
@@ -180,14 +181,54 @@ body{
     font-weight: bold;
 }
 
-.daily-forecast{
+.hourly-forecast{    
     margin: 0 auto;
     margin-top: 40px;
     width: 370px;
 }
-.daily-forecast #title{
+.hourly-forecast #title{
     margin: 0;
     font-size: 30px;
+    font-weight: bold;
+}
+
+.hour-property{
+    width: 45px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    margin: 10px 1px;
+    padding: 1px 1px;
+    float: left;
+}
+.hour-property img{
+    width: 40px;
+    filter: drop-shadow(0px 0px 4px whitesmoke);
+}
+.hour-property p{
+    font-size: small;
+}
+
+.scroll-box{
+    margin: 0 auto;
+    padding: 0;
+    overflow: overlay;
+    scroll-behavior: smooth;
+}
+.scroll-box::-webkit-scrollbar {
+    display: none;
+}
+#hourly-box{
+    height: 165px;
+    width: max-content;
+}
+
+.daily-forecast{
+    margin: 0 auto;
+    width: 370px;
+}
+p.title{
+    margin: 0;
+    text-align: center;;
     font-weight: bold;
 }
 .day-property{
@@ -213,42 +254,7 @@ body{
     font-size: small;
 }
 
-.hourly-forecast{    
-    margin: 0 auto;
-    /*margin: 40px 20px 20px 0;*/
-}
-.hourly-forecast #title{
-    margin: 0;
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.hour-property{
-    background-color: rgba(255, 255, 255, 0.2);    
-    border-radius: 4px;
-    margin: 10px 1px;
-    padding: 10px 1px;   
-    float: left;
-}
-.hour-property img{
-    width: 40px;
-    filter: drop-shadow(0px 0px 4px whitesmoke);
-}
-.hour-property p{
-    font-size: small;
-}
-
-.scroll-box{
-    width: 370px;
-    margin: 0 auto;
-    padding: 0;
-    overflow: overlay;
-    scroll-behavior: smooth;
-}
-.scroll-box::-webkit-scrollbar {
-    display: none;
-}
-.hourly-box{
-    height: 165px;
-    width: max-content;
+.degrees-min{
+    color: black;
+    text-shadow: 1px 1px 2px whitesmoke;
 }
