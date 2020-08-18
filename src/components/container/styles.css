@@ -114,13 +114,13 @@ body{
 .heavy-intensity-drizzle-rain,
 .shower-rain-and-drizzle,
 .heavy-shower-rain-and-drizzle,
-.shower-drizzle
+.shower-drizzle,
+.light-rain,
+.moderate-rain
 {
     background-image: url('../../assets/gifs/Drizzle.gif');
 }
 
-.light-rain,
-.moderate-rain,
 .heavy-intensity-rain,
 .very-heavy-rain,
 .extreme-rain,
