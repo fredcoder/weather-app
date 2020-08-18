@@ -145,7 +145,7 @@ class Container extends Component {
             return (
                 <React.Fragment>
                     {weather.main &&
-                        <div id="background" className={`${weather.main}`}>
+                        <div id="background" className={`${(weather.description).replace(' ','-')}`}>
                             <div id="filter" className={`${weather.icon.substring(2, 3)}`}>
                             </div>
                         </div>
