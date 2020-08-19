@@ -119,6 +119,7 @@ class Container extends Component {
 
     render() {
         //debugger;
+        var InitialPoint = 0;
 
         let weather = this.props.current.weather[0];
         if (this.props.daily.length === 8) {
@@ -129,14 +130,14 @@ class Container extends Component {
                 <div className="loading" onLoad={this.getNetwork()}>
                     {this.state.isNetworkOn
                         ?
-                        <p className="error">
-                            Geeting Geolocation.                            
+                        <p className="load">
+                            <p>Getting Geolocation.</p>
                             <SpinnerIcon />
-                            Please enable GPS.
+                            <p>Please allow the GPS in your browser.</p>
                         </p>
                         :
                         <p className="error">
-                            <img className="error-icon" src={thunder} alt="thunder" />Unfortunately Geolocation can not be detected at the moment.<br/>Please try later.
+                            <img className="error-icon" src={thunder} alt="thunder" />Unfortunately Geolocation can not be detected at the moment.<br />Please try later.
                         </p>
                     }
                 </div>)
@@ -145,13 +146,13 @@ class Container extends Component {
             return (
                 <React.Fragment>
                     {weather.main &&
-                        <div id="background" className={`${(weather.description).replace(' ','-')}`}>
+                        <div id="background" className={`${(weather.description).split(' ').join('-')}`}>
                             <div id="filter" className={`${weather.icon.substring(2, 3)}`}>
                             </div>
                         </div>
                     }
                     <div className="container">
-                        <div className="main">
+                        {/*<div className="main">
                             {weather.icon &&
                                 <div className="icon">
                                     <img src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`} alt={weather.icon} />
@@ -171,7 +172,7 @@ class Container extends Component {
                             </p>
                             <p id="feels">Feels like {Math.round(this.props.current.feels_like)}{this.props.info.measurement === "metric" ? "°C" : "°F"}</p>
                             <p id="location">{this.props.info.timezone.split('/')[1]}, {this.props.info.timezone.split('/')[0]}</p>
-                        </div>
+                        </div>*/}
                         <div className="details">
                             <div className="property">
                                 <p id="humidity">
@@ -197,14 +198,47 @@ class Container extends Component {
                         <div className="hourly-forecast">
                             <p className="title">Hourly Forecast</p>
                             <div className="scroll-box">
-                                <div id="hourly-box">
+                                <div className="hourly-box">
                                     {this.props.hourly.slice(0, 24).map(hour =>
                                         <div key={hour.dt} className="hour-property">
                                             <p className="time">{this.getTime(hour.dt)}</p>
-                                            <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />                                            
+                                            <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />
                                             <p className="degrees">{Math.round(hour.temp)}°</p>
                                         </div>
                                     )}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="hourly-forecast">
+                            <p className="title">Chance of Rain</p>
+                            <div className="scroll-box">
+                                <div className="hourly-box">
+                                    {this.props.hourly.slice(0, 24).map(hour =>
+                                        <div key={hour.dt} className="hour-property">
+                                            <p className="time">{this.getTime(hour.dt)}</p>
+                                            <div className="chart-space"></div>
+                                            <p className="degrees">{Math.round((hour.pop * 100), 2)}%</p>
+                                        </div>
+                                    )}
+                                    <svg className="chart">
+                                        <defs>
+                                            <marker id="white-circle"
+                                                viewBox="0 0 10 10" refX="5" refY="5" orient="auto" >
+                                                <circle fill="white" cx="5" cy="5" r="5" />
+                                            </marker>
+                                        </defs>
+                                        <polyline
+                                            fill="none"
+                                            stroke="#0074d9"
+                                            strokeWidth="4"
+                                            markerStart= "url(#white-circle)"
+                                            markerMid= "url(#white-circle)"
+                                            markerEnd= "url(#white-circle)"
+                                            points={this.props.hourly.slice(0, 24).map((hour, index) => `
+                                            ${(25 + (index * 49))},${(105 - (hour.pop * 100))}
+                                        `)} />
+                                    </svg>
                                 </div>
                             </div>
                         </div>
@@ -223,7 +257,7 @@ class Container extends Component {
                         <div className="clearfix">
                         </div>
                     </div>
-                </React.Fragment>
+                </React.Fragment >
             );
         }
     }
