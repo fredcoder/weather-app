@@ -198,12 +198,11 @@ class Container extends Component {
                         <div className="hourly-forecast">
                             <p className="title">Hourly Forecast</p>
                             <div className="scroll-box">
-                                <div className="hourly-box">
+                                <div className="hourly-box-forecast">
                                     {this.props.hourly.slice(0, 24).map(hour =>
                                         <div key={hour.dt} className="hour-property">
                                             <p className="time">{this.getTime(hour.dt)}</p>
-                                            <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />
-                                            <p className="degrees">{Math.round(hour.temp)}°</p>
+                                            <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />                                            
                                         </div>
                                     )}
                                 </div>
