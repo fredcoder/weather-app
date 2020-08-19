@@ -209,9 +209,40 @@ class Container extends Component {
                                 </div>
                             </div>
                         </div>
-
                         <div className="hourly-forecast">
-                            <p className="title">Chance of Rain</p>
+                            <p className="title">Temperature (°C)</p>
+                            <div className="scroll-box">
+                                <div className="hourly-box">
+                                    {this.props.hourly.slice(0, 24).map(hour =>
+                                        <div key={hour.dt} className="hour-property">
+                                            <p className="time">{this.getTime(hour.dt)}</p>
+                                            <div className="chart-space"></div>
+                                            <p className="degrees">{Math.round(hour.temp)}°</p>
+                                        </div>
+                                    )}
+                                    <svg className="chart">
+                                        <defs>
+                                            <marker id="white-circle"
+                                                viewBox="0 0 10 10" refX="5" refY="5" orient="auto" >
+                                                <circle fill="white" cx="5" cy="5" r="5" />
+                                            </marker>
+                                        </defs>
+                                        <polyline
+                                            fill="none"
+                                            stroke="#EC6E4C"
+                                            strokeWidth="4"
+                                            markerStart= "url(#white-circle)"
+                                            markerMid= "url(#white-circle)"
+                                            markerEnd= "url(#white-circle)"
+                                            points={this.props.hourly.slice(0, 24).map((hour, index) => `
+                                            ${(25 + (index * 49))},${(100-(hour.temp * 2))}
+                                        `)} />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="hourly-forecast">
+                            <p className="title">Chance of Rain (%)</p>
                             <div className="scroll-box">
                                 <div className="hourly-box">
                                     {this.props.hourly.slice(0, 24).map(hour =>
@@ -237,6 +268,38 @@ class Container extends Component {
                                             markerEnd= "url(#white-circle)"
                                             points={this.props.hourly.slice(0, 24).map((hour, index) => `
                                             ${(25 + (index * 49))},${(105 - (hour.pop * 100))}
+                                        `)} />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="hourly-forecast">
+                            <p className="title">Wind Speed (km/h)</p>
+                            <div className="scroll-box">
+                                <div className="hourly-box">
+                                    {this.props.hourly.slice(0, 24).map(hour =>
+                                        <div key={hour.dt} className="hour-property">
+                                            <p className="time">{this.getTime(hour.dt)}</p>
+                                            <div className="chart-space"></div>
+                                            <p className="degrees">{Math.round((hour.wind_speed * 3.6), 2)}</p>
+                                        </div>
+                                    )}
+                                    <svg className="chart">
+                                        <defs>
+                                            <marker id="white-circle"
+                                                viewBox="0 0 10 10" refX="5" refY="5" orient="auto" >
+                                                <circle fill="white" cx="5" cy="5" r="5" />
+                                            </marker>
+                                        </defs>
+                                        <polyline
+                                            fill="none"
+                                            stroke="grey"
+                                            strokeWidth="4"
+                                            markerStart= "url(#white-circle)"
+                                            markerMid= "url(#white-circle)"
+                                            markerEnd= "url(#white-circle)"
+                                            points={this.props.hourly.slice(0, 24).map((hour, index) => `
+                                            ${(25 + (index * 49))},${(105 - (hour.wind_speed * 3.6))}
                                         `)} />
                                     </svg>
                                 </div>
