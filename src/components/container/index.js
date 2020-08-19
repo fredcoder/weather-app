@@ -144,14 +144,15 @@ class Container extends Component {
         }
         else {
             return (
-                <React.Fragment>
-                    {weather.main &&
+                < React.Fragment >
+                    {
+                        weather.main &&
                         <div id="background" className={`${(weather.description).split(' ').join('-')}`}>
                             <div id="filter" className={`${weather.icon.substring(2, 3)}`}>
                             </div>
                         </div>
                     }
-                    <div className="container">
+                    < div className="container" >
                         <div className="main">
                             {weather.icon &&
                                 <div className="icon">
@@ -196,21 +197,25 @@ class Container extends Component {
                             </div>
                         </div>
                         <div className="hourly-forecast">
+
+                            <div className="scroll-box">
+
+                            </div>
+                        </div>
+                        <div className="hourly-forecast">
                             <p className="title">Hourly Forecast</p>
                             <div className="scroll-box">
+                                {/*Hourly Forecast*/}
                                 <div className="hourly-box-forecast">
                                     {this.props.hourly.slice(0, 24).map(hour =>
                                         <div key={hour.dt} className="hour-property">
                                             <p className="time">{this.getTime(hour.dt)}</p>
-                                            <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />                                            
+                                            <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />
                                         </div>
                                     )}
                                 </div>
-                            </div>
-                        </div>
-                        <div className="hourly-forecast">
-                            <p className="title">Temperature (°C)</p>
-                            <div className="scroll-box">
+                                {/*Temperature*/}
+                                <p className="subtitle" id="temperature-chart">Temperature (°C)</p>
                                 <div className="hourly-box">
                                     {this.props.hourly.slice(0, 24).map(hour =>
                                         <div key={hour.dt} className="hour-property">
@@ -230,19 +235,16 @@ class Container extends Component {
                                             fill="none"
                                             stroke="#EC6E4C"
                                             strokeWidth="4"
-                                            markerStart= "url(#white-circle)"
-                                            markerMid= "url(#white-circle)"
-                                            markerEnd= "url(#white-circle)"
+                                            markerStart="url(#white-circle)"
+                                            markerMid="url(#white-circle)"
+                                            markerEnd="url(#white-circle)"
                                             points={this.props.hourly.slice(0, 24).map((hour, index) => `
-                                            ${(25 + (index * 49))},${(100-(hour.temp * 2))}
+                                            ${(25 + (index * 49))},${(100 - (hour.temp * 2))}
                                         `)} />
                                     </svg>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="hourly-forecast">
-                            <p className="title">Chance of Rain (%)</p>
-                            <div className="scroll-box">
+                                {/*Chance of Rain*/}
+                                <p className="subtitle" id="rain-chart">Chance of Rain (%)</p>
                                 <div className="hourly-box">
                                     {this.props.hourly.slice(0, 24).map(hour =>
                                         <div key={hour.dt} className="hour-property">
@@ -262,19 +264,16 @@ class Container extends Component {
                                             fill="none"
                                             stroke="#0074d9"
                                             strokeWidth="4"
-                                            markerStart= "url(#white-circle)"
-                                            markerMid= "url(#white-circle)"
-                                            markerEnd= "url(#white-circle)"
+                                            markerStart="url(#white-circle)"
+                                            markerMid="url(#white-circle)"
+                                            markerEnd="url(#white-circle)"
                                             points={this.props.hourly.slice(0, 24).map((hour, index) => `
                                             ${(25 + (index * 49))},${(105 - (hour.pop * 100))}
                                         `)} />
                                     </svg>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="hourly-forecast">
-                            <p className="title">Wind Speed (km/h)</p>
-                            <div className="scroll-box">
+                                {/*Wind Speed*/}
+                                <p className="subtitle" id="wind-chart">Wind Speed (km/h)</p>
                                 <div className="hourly-box">
                                     {this.props.hourly.slice(0, 24).map(hour =>
                                         <div key={hour.dt} className="hour-property">
@@ -292,16 +291,29 @@ class Container extends Component {
                                         </defs>
                                         <polyline
                                             fill="none"
-                                            stroke="grey"
+                                            stroke="#48484A"
                                             strokeWidth="4"
-                                            markerStart= "url(#white-circle)"
-                                            markerMid= "url(#white-circle)"
-                                            markerEnd= "url(#white-circle)"
+                                            markerStart="url(#white-circle)"
+                                            markerMid="url(#white-circle)"
+                                            markerEnd="url(#white-circle)"
                                             points={this.props.hourly.slice(0, 24).map((hour, index) => `
                                             ${(25 + (index * 49))},${(105 - (hour.wind_speed * 3.6))}
                                         `)} />
                                     </svg>
                                 </div>
+
+                            </div>
+                        </div>
+                        <div className="hourly-forecast">
+
+                            <div className="scroll-box">
+
+                            </div>
+                        </div>
+                        <div className="hourly-forecast">
+
+                            <div className="scroll-box">
+
                             </div>
                         </div>
                         <div className="daily-forecast">
@@ -318,7 +330,7 @@ class Container extends Component {
                         </div>
                         <div className="clearfix">
                         </div>
-                    </div>
+                    </div >
                 </React.Fragment >
             );
         }
