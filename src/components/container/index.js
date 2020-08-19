@@ -152,7 +152,7 @@ class Container extends Component {
                         </div>
                     }
                     <div className="container">
-                        {/*<div className="main">
+                        <div className="main">
                             {weather.icon &&
                                 <div className="icon">
                                     <img src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`} alt={weather.icon} />
@@ -172,7 +172,7 @@ class Container extends Component {
                             </p>
                             <p id="feels">Feels like {Math.round(this.props.current.feels_like)}{this.props.info.measurement === "metric" ? "°C" : "°F"}</p>
                             <p id="location">{this.props.info.timezone.split('/')[1]}, {this.props.info.timezone.split('/')[0]}</p>
-                        </div>*/}
+                        </div>
                         <div className="details">
                             <div className="property">
                                 <p id="humidity">
