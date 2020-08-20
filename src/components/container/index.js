@@ -6,7 +6,9 @@ import visibility from '../../assets/images/visibility.png';
 import wind from '../../assets/images/wind.png';
 import pressure from '../../assets/images/pressure.png';
 import thunder from '../../assets/images/thunder.png';
+
 import SpinnerIcon from '../SpinnerIcon';
+import Property from '../Property';
 import './styles.css';
 
 class Container extends Component {
@@ -53,9 +55,10 @@ class Container extends Component {
     getDateTime = () => {
         Date.prototype.toShortFormat = function () {
 
-            let monthNames = ["Jan", "Feb", "Mar", "Apr",
-                "May", "Jun", "Jul", "Aug",
-                "Sep", "Oct", "Nov", "Dec"];
+            let monthNames =
+                ["Jan", "Feb", "Mar", "Apr",
+                    "May", "Jun", "Jul", "Aug",
+                    "Sep", "Oct", "Nov", "Dec"];
 
             let day = this.getDate();
 
@@ -116,10 +119,8 @@ class Container extends Component {
         }.bind(this), 60000);
     }
 
-
     render() {
         //debugger;
-        var InitialPoint = 0;
 
         let weather = this.props.current.weather[0];
         if (this.props.daily.length === 8) {
@@ -130,11 +131,10 @@ class Container extends Component {
                 <div className="loading" onLoad={this.getNetwork()}>
                     {this.state.isNetworkOn
                         ?
-                        <p className="load">
-                            <p>Getting Geolocation.</p>
+                        <React.Fragment>
+                            <p className="load">Getting Geolocation.<br />Please allow the GPS in your browser.</p>
                             <SpinnerIcon />
-                            <p>Please allow the GPS in your browser.</p>
-                        </p>
+                        </React.Fragment>
                         :
                         <p className="error">
                             <img className="error-icon" src={thunder} alt="thunder" />Unfortunately Geolocation can not be detected at the moment.<br />Please try later.
@@ -156,7 +156,7 @@ class Container extends Component {
                         <div className="main">
                             {weather.icon &&
                                 <div className="icon">
-                                    <img src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`} alt={weather.icon} />
+                                    <img src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`} alt={weather.icon} />
                                     <p><small>{weather.description}</small></p>
                                 </div>
                             }
@@ -175,33 +175,12 @@ class Container extends Component {
                             <p id="location">{this.props.info.timezone.split('/')[1]}, {this.props.info.timezone.split('/')[0]}</p>
                         </div>
                         <div className="details">
-                            <div className="property">
-                                <p id="humidity">
-                                    <img className="icons" src={humidity} alt="humidity" />Humidity <span className="value">{this.props.current.humidity}%</span>
-                                </p>
-                            </div>
-                            <div className="property">
-                                <p id="wind">
-                                    <img className="icons" src={wind} alt="wind" />Wind speed <span className="value">{this.props.info.measurement === `metric` ? `${Math.round(this.props.current.wind_speed * 3.6)}k/h` : `${Math.round(this.props.current.wind_speed)}mi/h`}</span>
-                                </p>
-                            </div>
-                            <div className="property">
-                                <p id="pressure">
-                                    <img className="icons" src={pressure} alt="pressure" />Pressure <span className="value">{this.props.current.pressure}hPa</span>
-                                </p>
-                            </div>
-                            <div className="property">
-                                <p id="visibility">
-                                    <img className="icons" src={visibility} alt="visibility" />Visibility <span className="value">{(this.props.current.visibility / 1000)}km</span>
-                                </p>
-                            </div>
+                            <Property propertyId="humidity" iconImage={humidity} Text="Humidity" Value={`${this.props.current.humidity}%`}/>
+                            <Property propertyId="wind" iconImage={wind} Text="Wind speed" Value={this.props.info.measurement === `metric` ? `${Math.round(this.props.current.wind_speed * 3.6)}k/h` : `${Math.round(this.props.current.wind_speed)}mi/h`}/>
+                            <Property propertyId="pressure" iconImage={pressure} Text="Pressure" Value={`${this.props.current.pressure}hPa`}/>
+                            <Property propertyId="visibility" iconImage={visibility} Text="Visibility" Value={`${(this.props.current.visibility / 1000)}km`}/>
                         </div>
-                        <div className="hourly-forecast">
-
-                            <div className="scroll-box">
-
-                            </div>
-                        </div>
+                        
                         <div className="hourly-forecast">
                             <p className="title">Hourly Forecast</p>
                             <div className="scroll-box">
@@ -210,7 +189,7 @@ class Container extends Component {
                                     {this.props.hourly.slice(0, 24).map(hour =>
                                         <div key={hour.dt} className="hour-property">
                                             <p className="time">{this.getTime(hour.dt)}</p>
-                                            <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />
+                                            <img src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />
                                         </div>
                                     )}
                                 </div>
@@ -301,19 +280,6 @@ class Container extends Component {
                                         `)} />
                                     </svg>
                                 </div>
-
-                            </div>
-                        </div>
-                        <div className="hourly-forecast">
-
-                            <div className="scroll-box">
-
-                            </div>
-                        </div>
-                        <div className="hourly-forecast">
-
-                            <div className="scroll-box">
-
                             </div>
                         </div>
                         <div className="daily-forecast">
@@ -322,7 +288,7 @@ class Container extends Component {
                                 this.props.daily.map(day =>
                                     <div key={day.dt} className="day-property">
                                         <p className="time">{this.getDay(day.dt)}</p>
-                                        <img src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} alt="weather" />
+                                        <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} alt="weather" />
                                         <p className="degrees-max">{Math.round(day.temp.max)}°</p>
                                         <p className="degrees-min">{Math.round(day.temp.min)}°</p>
                                     </div>
