@@ -9,6 +9,11 @@ import thunder from '../../assets/images/thunder.png';
 
 import SpinnerIcon from '../SpinnerIcon';
 import Property from '../Property';
+import Chart from '../Chart';
+
+import getTime from '../../functions/getTime';
+import getDay from '../../functions/getDay';
+
 import './styles.css';
 
 class Container extends Component {
@@ -71,33 +76,6 @@ class Container extends Component {
         }
         let today = new Date();
         this.setState({ dateTime: today.toShortFormat() });
-    }
-
-    getTime = (time) => {
-        // Create a new JavaScript Date object based on the timestamp
-        // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-        var date = new Date(time * 1000);
-        // Hours part from the timestamp
-        var hours = date.getHours();
-        // Minutes part from the timestamp
-        var minutes = "0" + date.getMinutes();
-        // Seconds part from the timestamp
-        //var seconds = "0" + date.getSeconds();
-        // Will display time in 10:30:23 format
-        var formattedTime = hours + ':' + minutes.substr(-2);// + ':' + seconds.substr(-2);
-
-        return formattedTime;
-    }
-
-    getDay = (dt) => {
-
-        var day = new Date(dt * 1000);
-
-        let monthNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-
-        let formattedDay = monthNames[day.getDay()];
-
-        return formattedDay;
     }
 
     switchUnits = () => {
@@ -188,98 +166,14 @@ class Container extends Component {
                                 <div className="hourly-box-forecast">
                                     {this.props.hourly.slice(0, 24).map(hour =>
                                         <div key={hour.dt} className="hour-property">
-                                            <p className="time">{this.getTime(hour.dt)}</p>
+                                            <p className="time">{getTime(hour.dt)}</p>
                                             <img src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />
                                         </div>
                                     )}
                                 </div>
-                                {/*Temperature*/}
-                                <p className="subtitle" id="temperature-chart">Temperature (°C)</p>
-                                <div className="hourly-box">
-                                    {this.props.hourly.slice(0, 24).map(hour =>
-                                        <div key={hour.dt} className="hour-property">
-                                            <p className="time">{this.getTime(hour.dt)}</p>
-                                            <div className="chart-space"></div>
-                                            <p className="degrees">{Math.round(hour.temp)}°</p>
-                                        </div>
-                                    )}
-                                    <svg className="chart">
-                                        <defs>
-                                            <marker id="white-circle"
-                                                viewBox="0 0 10 10" refX="5" refY="5" orient="auto" >
-                                                <circle fill="white" cx="5" cy="5" r="5" />
-                                            </marker>
-                                        </defs>
-                                        <polyline
-                                            fill="none"
-                                            stroke="#EC6E4C"
-                                            strokeWidth="4"
-                                            markerStart="url(#white-circle)"
-                                            markerMid="url(#white-circle)"
-                                            markerEnd="url(#white-circle)"
-                                            points={this.props.hourly.slice(0, 24).map((hour, index) => `
-                                            ${(25 + (index * 49))},${(100 - (hour.temp * 2))}
-                                        `)} />
-                                    </svg>
-                                </div>
-                                {/*Chance of Rain*/}
-                                <p className="subtitle" id="rain-chart">Chance of Rain (%)</p>
-                                <div className="hourly-box">
-                                    {this.props.hourly.slice(0, 24).map(hour =>
-                                        <div key={hour.dt} className="hour-property">
-                                            <p className="time">{this.getTime(hour.dt)}</p>
-                                            <div className="chart-space"></div>
-                                            <p className="degrees">{Math.round((hour.pop * 100), 2)}%</p>
-                                        </div>
-                                    )}
-                                    <svg className="chart">
-                                        <defs>
-                                            <marker id="white-circle"
-                                                viewBox="0 0 10 10" refX="5" refY="5" orient="auto" >
-                                                <circle fill="white" cx="5" cy="5" r="5" />
-                                            </marker>
-                                        </defs>
-                                        <polyline
-                                            fill="none"
-                                            stroke="#0074d9"
-                                            strokeWidth="4"
-                                            markerStart="url(#white-circle)"
-                                            markerMid="url(#white-circle)"
-                                            markerEnd="url(#white-circle)"
-                                            points={this.props.hourly.slice(0, 24).map((hour, index) => `
-                                            ${(25 + (index * 49))},${(105 - (hour.pop * 100))}
-                                        `)} />
-                                    </svg>
-                                </div>
-                                {/*Wind Speed*/}
-                                <p className="subtitle" id="wind-chart">Wind Speed (km/h)</p>
-                                <div className="hourly-box">
-                                    {this.props.hourly.slice(0, 24).map(hour =>
-                                        <div key={hour.dt} className="hour-property">
-                                            <p className="time">{this.getTime(hour.dt)}</p>
-                                            <div className="chart-space"></div>
-                                            <p className="degrees">{Math.round((hour.wind_speed * 3.6), 2)}</p>
-                                        </div>
-                                    )}
-                                    <svg className="chart">
-                                        <defs>
-                                            <marker id="white-circle"
-                                                viewBox="0 0 10 10" refX="5" refY="5" orient="auto" >
-                                                <circle fill="white" cx="5" cy="5" r="5" />
-                                            </marker>
-                                        </defs>
-                                        <polyline
-                                            fill="none"
-                                            stroke="#48484A"
-                                            strokeWidth="4"
-                                            markerStart="url(#white-circle)"
-                                            markerMid="url(#white-circle)"
-                                            markerEnd="url(#white-circle)"
-                                            points={this.props.hourly.slice(0, 24).map((hour, index) => `
-                                            ${(25 + (index * 49))},${(105 - (hour.wind_speed * 3.6))}
-                                        `)} />
-                                    </svg>
-                                </div>
+                                <Chart Title="Temperature (°C)" Unit="temp" Values={this.props.hourly} LineColor="#EC6E4C"/>
+                                <Chart Title="Chance of Rain (%)" Unit="rain" Values={this.props.hourly} LineColor="#0074d9"/>
+                                <Chart Title="Wind Speed (km/h)" Unit="wind" Values={this.props.hourly} LineColor="#48484A"/>
                             </div>
                         </div>
                         <div className="daily-forecast">
@@ -287,7 +181,7 @@ class Container extends Component {
                             {this.props.daily.length === 7 &&
                                 this.props.daily.map(day =>
                                     <div key={day.dt} className="day-property">
-                                        <p className="time">{this.getDay(day.dt)}</p>
+                                        <p className="time">{getDay(day.dt)}</p>
                                         <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} alt="weather" />
                                         <p className="degrees-max">{Math.round(day.temp.max)}°</p>
                                         <p className="degrees-min">{Math.round(day.temp.min)}°</p>
