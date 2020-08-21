@@ -1,4 +1,4 @@
-import { currentWeatherType } from '../actions/currentWeatherAction'
+import { currentWeatherType, currentLocationType } from '../actions/currentWeatherAction'
 
 const defaultState = {
     currentWeather: {
@@ -73,7 +73,26 @@ const defaultState = {
             pop: 0.49,
             rain: {}
         }]
-    }
+    },
+    currentLocation:{
+        latitude: 0,
+        longitude: 0,
+        plusCode: "",
+        localityLanguageRequested: "",
+        continent: "",
+        continentCode: "",
+        countryName: "",
+        countryCode: "",
+        principalSubdivision: "",
+        principalSubdivisionCode: "",
+        city: "",
+        locality: "",
+        postcode: "",
+        localityInfo: {
+          administrative: [{}],
+          informative: [{}]
+        }
+      }
 };
 
 const reducer = (state = defaultState, action) => {
@@ -83,6 +102,12 @@ const reducer = (state = defaultState, action) => {
             return {
                 ...state,
                 currentWeather: action.payload
+            }
+        }
+        case currentLocationType: {
+            return {
+                ...state,
+                currentLocation: action.payload
             }
         }
         default:

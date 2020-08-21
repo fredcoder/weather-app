@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCurrentWeather } from '../../redux/actions/currentWeatherAction';
+import { getCurrentWeather, getCurrentLocation } from '../../redux/actions/currentWeatherAction';
 import humidity from '../../assets/images/humidity.jpg';
 import visibility from '../../assets/images/visibility.png';
 import wind from '../../assets/images/wind.png';
@@ -19,7 +19,7 @@ import './styles.css';
 class Container extends Component {
 
     state = {
-        language: navigator.language.substring(0, 2),
+        language: "en",/*navigator.language.substring(0, 2),*/
         latitude: "",
         longitude: "",
         measurement: "metric",
@@ -52,6 +52,7 @@ class Container extends Component {
                 },
                     () => {
                         this.props.getCurrentWeather(this.state);
+                        this.props.getCurrentLocation(this.state);
                     });
             });
         }
@@ -79,6 +80,8 @@ class Container extends Component {
     }
 
     switchUnits = () => {
+        return;
+        /*
         if (this.state.measurement === "metric") {
             this.setState({ measurement: "imperial" }, () => {
                 this.props.getCurrentWeather(this.state);
@@ -88,6 +91,7 @@ class Container extends Component {
                 this.props.getCurrentWeather(this.state);
             });
         }
+        */
     }
 
     getNetwork = () => {
@@ -139,7 +143,7 @@ class Container extends Component {
                                 </div>
                             }
                             <div className="date">
-                                <p id="day">Today</p>
+                                <p id="day">{getDay(this.props.current.dt,false)}</p>
                                 <p id="date">{this.state.dateTime}</p>
                             </div>
                         </div>
@@ -150,7 +154,7 @@ class Container extends Component {
                                 <span onClick={this.switchUnits} id="degrees">{this.props.info.measurement === "metric" ? "°C" : "°F"}</span>
                             </p>
                             <p id="feels">Feels like {Math.round(this.props.current.feels_like)}{this.props.info.measurement === "metric" ? "°C" : "°F"}</p>
-                            <p id="location">{this.props.info.timezone.split('/')[1]}, {this.props.info.timezone.split('/')[0]}</p>
+                            <p id="location">{this.props.location.city}, {this.props.location.countryName}</p>
                         </div>
                         <div className="details">
                             <Property propertyId="humidity" iconImage={humidity} Text="Humidity" Value={`${this.props.current.humidity}%`}/>
@@ -181,7 +185,7 @@ class Container extends Component {
                             {this.props.daily.length === 7 &&
                                 this.props.daily.map(day =>
                                     <div key={day.dt} className="day-property">
-                                        <p className="time">{getDay(day.dt)}</p>
+                                        <p className="time">{getDay(day.dt,true)}</p>
                                         <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} alt="weather" />
                                         <p className="degrees-max">{Math.round(day.temp.max)}°</p>
                                         <p className="degrees-min">{Math.round(day.temp.min)}°</p>
@@ -202,12 +206,14 @@ const mapStateToProps = (store) => {
         current: store.currentWeatherReducer.currentWeather.current,
         daily: store.currentWeatherReducer.currentWeather.daily,
         hourly: store.currentWeatherReducer.currentWeather.hourly,
-        info: store.currentWeatherReducer.currentWeather
+        info: store.currentWeatherReducer.currentWeather,
+        location: store.currentWeatherReducer.currentLocation
     }
 }
 
 const mapDispatchToProps = {
-    getCurrentWeather
+    getCurrentWeather,
+    getCurrentLocation
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

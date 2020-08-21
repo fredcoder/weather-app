@@ -324,7 +324,7 @@ body{
     margin-top: -10px;
     margin-bottom: 5px;
     width: 57px;
-    filter: drop-shadow(0px 0px 4px whitesmoke);
+    filter: drop-shadow(0px 0px 4px whitesmoke) hue-rotate(33deg) brightness(1.4);
 }
 .hour-property p{
     font-size: small;
@@ -354,24 +354,37 @@ body{
 }
 p.title{
     margin: 0;
-    text-align: center;;
+    text-align: center;
     font-weight: bold;
+    font-size: x-large;
 }
 p.subtitle{
     position: absolute;
     font-size: smaller;
     font-weight: 500;    
-    margin-left: 5px;
+    padding: 0px 5px 1px;
 }
 
 #temp-chart{
     margin-top: -8px;
+    background: rgb(236, 110, 76);
+    border-radius: 4px;
+    text-shadow: none;
+    opacity: 0.8;
 }
 #rain-chart{
     margin-top: 42px;
+    background: rgb(0, 116, 217);
+    border-radius: 4px;
+    text-shadow: none;
+    opacity: 0.8;
 }
 #wind-chart{
     margin-top: 91px;
+    background: rgb(72, 72, 74);
+    border-radius: 4px;
+    text-shadow: none;
+    opacity: 0.8;
 }
 
 .day-property{
@@ -390,8 +403,8 @@ p.subtitle{
 }
 .day-property img{
     margin: -12px;
-    width: 145%;
-    filter: drop-shadow(0px 0px 4px whitesmoke);
+    width: 130%;
+    filter: drop-shadow(0px 0px 4px whitesmoke) hue-rotate(33deg) brightness(1.4);
 }
 .day-property p{
     font-size: small;

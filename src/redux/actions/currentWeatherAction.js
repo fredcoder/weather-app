@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const currentWeatherType = 'currentWeatherType';
+export const currentLocationType = 'currentLocationType';
 
 export const getCurrentWeather = ({language, latitude, longitude, measurement}) => {
     return (dispatch) => {
@@ -18,3 +19,19 @@ export function getWeather(data, measurement) {
         payload: currentWeather
     };
 };
+
+export const getCurrentLocation = ({language, latitude, longitude}) => {
+    return (dispatch) => {
+        //debugger;
+        return axios.get(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=${language}`)
+            .then((response) => {
+                dispatch(getLocation(response.data));
+            })
+    }
+};
+export function getLocation(currentLocation) {
+    return {
+        type: currentLocationType,
+        payload: currentLocation
+    };
+}
