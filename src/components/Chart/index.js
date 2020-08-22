@@ -7,17 +7,21 @@ const Chart = ({ Title, Unit, Values, LineColor }) => {
         <React.Fragment>
             <p className="subtitle" id={`${Unit}-chart`}>{Title}</p>
             <div className="hourly-box">
-                {Values.slice(0, 24).map(hour =>
-                    <div key={hour.dt} className="hour-property">
-                        <p className="time">{getTime(hour.dt)}</p>
-                        <div className="chart-space"></div>
-                        <p className="degrees">
-                        {Unit === "temp" && `${Math.round(hour.temp)}°`}
-                        {Unit === "rain" && `${Math.round((hour.pop * 100), 2)}%`}
-                        {Unit === "wind" && `${Math.round((hour.wind_speed * 3.6), 2)}`}
-                        </p>
-                    </div>
-                )}
+                <div>
+                    {Values.slice(0, 24).map(hour =>
+                        <div key={hour.dt} className="hour-property">
+                            <p className="time">{getTime(hour.dt)}</p>
+                            <div className="chart-space"></div>
+                            <p className="degrees">
+                                {Unit === "temp" && `${Math.round(hour.temp)}°`}
+                                {Unit === "rain" && `${Math.round((hour.pop * 100), 2)}%`}
+                                {Unit === "wind" && `${Math.round((hour.wind_speed * 3.6), 2)}`}
+                            </p>
+                        </div>
+                    )}
+                </div>
+                <div className="clearfix">
+                </div>
                 <svg className="chart">
                     <defs>
                         <marker id="white-circle"
@@ -33,21 +37,23 @@ const Chart = ({ Title, Unit, Values, LineColor }) => {
                         markerMid="url(#white-circle)"
                         markerEnd="url(#white-circle)"
                         points={Values.slice(0, 24).map((hour, index) => {
-                            switch (Unit){
+                            switch (Unit) {
                                 case "temp":
                                     return (`${(25 + (index * 49))},${(100 - (hour.temp * 2))}`)
-                                break;
+                                    break;
                                 case "rain":
                                     return (`${(25 + (index * 49))},${(100 - (hour.pop * 100))}`)
-                                break;
+                                    break;
                                 case "wind":
                                     return (`${(25 + (index * 49))},${(100 - (hour.wind_speed * 3.6))}`)
-                                break;
+                                    break;
                                 default:
                                     break;
                             }
                         })} />
                 </svg>
+            </div>
+            <div className="clearfix">
             </div>
         </React.Fragment>
     )
