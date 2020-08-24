@@ -1,5 +1,6 @@
 import React from 'react';
 import getTime from '../../functions/getTime';
+import './styles.css';
 
 const Chart = ({ Title, Unit, Values, LineColor }) => {
     debugger;
