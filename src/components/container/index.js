@@ -143,7 +143,7 @@ class Container extends Component {
                                 </div>
                             }
                             <div className="date">
-                                <p id="day">{getDay(this.props.current.dt,false)}</p>
+                                <p id="day">{getDay(this.props.current.dt, false)}</p>
                                 <p id="date">{this.state.dateTime}</p>
                             </div>
                         </div>
@@ -157,12 +157,12 @@ class Container extends Component {
                             <p id="location">{this.props.location.city}, {this.props.location.countryName}</p>
                         </div>
                         <div className="details">
-                            <Property propertyId="humidity" iconImage={humidity} Text="Humidity" Value={`${this.props.current.humidity}%`}/>
-                            <Property propertyId="wind" iconImage={wind} Text="Wind speed" Value={this.props.info.measurement === `metric` ? `${Math.round(this.props.current.wind_speed * 3.6)}k/h` : `${Math.round(this.props.current.wind_speed)}mi/h`}/>
-                            <Property propertyId="pressure" iconImage={pressure} Text="Pressure" Value={`${this.props.current.pressure}hPa`}/>
-                            <Property propertyId="visibility" iconImage={visibility} Text="Visibility" Value={`${(this.props.current.visibility / 1000)}km`}/>
+                            <Property propertyId="humidity" iconImage={humidity} Text="Humidity" Value={`${this.props.current.humidity}%`} />
+                            <Property propertyId="wind" iconImage={wind} Text="Wind speed" Value={this.props.info.measurement === `metric` ? `${Math.round(this.props.current.wind_speed * 3.6)}k/h` : `${Math.round(this.props.current.wind_speed)}mi/h`} />
+                            <Property propertyId="pressure" iconImage={pressure} Text="Pressure" Value={`${this.props.current.pressure}hPa`} />
+                            <Property propertyId="visibility" iconImage={visibility} Text="Visibility" Value={`${(this.props.current.visibility / 1000)}km`} />
                         </div>
-                        
+
                         <div className="hourly-forecast">
                             <p className="title">Hourly Forecast</p>
                             <div className="scroll-box">
@@ -175,9 +175,9 @@ class Container extends Component {
                                         </div>
                                     )}
                                 </div>
-                                <Chart Title="Temperature (°C)" Unit="temp" Values={this.props.hourly} LineColor="#EC6E4C"/>
-                                <Chart Title="Chance of Rain (%)" Unit="rain" Values={this.props.hourly} LineColor="#0074d9"/>
-                                <Chart Title="Wind Speed (km/h)" Unit="wind" Values={this.props.hourly} LineColor="#48484A"/>
+                                <Chart Title="Temperature (°C)" Unit="temp" Values={this.props.hourly} LineColor="#EC6E4C" />
+                                <Chart Title="Chance of Rain (%)" Unit="rain" Values={this.props.hourly} LineColor="#0074d9" />
+                                <Chart Title="Wind Speed (km/h)" Unit="wind" Values={this.props.hourly} LineColor="#48484A" />
                             </div>
                         </div>
                         <div className="daily-forecast">
@@ -185,7 +185,7 @@ class Container extends Component {
                             {this.props.daily.length === 7 &&
                                 this.props.daily.map(day =>
                                     <div key={day.dt} className="day-property">
-                                        <p className="time">{getDay(day.dt,true)}</p>
+                                        <p className="time">{getDay(day.dt, true)}</p>
                                         <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} alt="weather" />
                                         <p className="degrees-max">{Math.round(day.temp.max)}°</p>
                                         <p className="degrees-min">{Math.round(day.temp.min)}°</p>
@@ -194,6 +194,9 @@ class Container extends Component {
                         </div>
                         <div className="clearfix">
                         </div>
+                        <footer>
+                            <p>Developed by Freddy Clavijo &copy; {this.state.dateTime.substr(7, 4)}</p>
+                        </footer>
                     </div >
                 </React.Fragment >
             );
