@@ -3,7 +3,7 @@ import getTime from '../../functions/getTime';
 import './styles.css';
 
 const Chart = ({ Title, Unit, Values, LineColor }) => {
-    debugger;
+    //debugger;
     return (
         <React.Fragment>
             <p className="subtitle" id={`${Unit}-chart`}>{Title}</p>

@@ -34,7 +34,7 @@ class Container extends Component {
     }
 
     getUpdated = () => {
-        debugger;
+        //debugger;
         setInterval(function () {
             this.getDateTime();
             this.getGeolocation();
@@ -95,7 +95,7 @@ class Container extends Component {
     }
 
     getNetwork = () => {
-        debugger;
+        //debugger;
         setTimeout(function () {
             this.setState({ isNetworkOn: false });
         }.bind(this), 60000);
@@ -127,7 +127,7 @@ class Container extends Component {
         else {
             return (
                 < React.Fragment >
-                    {
+                    {/* BACKGROUND */
                         weather.main &&
                         <div id="background" className={`${(weather.description).split(' ').join('-')}`}>
                             <div id="filter" className={`${weather.icon.substring(2, 3)}`}>
@@ -135,67 +135,81 @@ class Container extends Component {
                         </div>
                     }
                     < div className="container" >
-                        <div className="main">
-                            {weather.icon &&
-                                <div className="icon">
-                                    <img src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`} alt={weather.icon} />
-                                    <p><small>{weather.description}</small></p>
+                        <section id="wrapper">
+                            <header>
+                                <section className="main">
+                                    {weather.icon &&
+                                        <div className="icon">
+                                            <img src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`} alt={weather.icon} />
+                                            <p><small>{weather.description}</small></p>
+                                        </div>
+                                    }
+                                    <div className="date">
+                                        <p id="day">{getDay(this.props.current.dt, false)}</p>
+                                        <p id="date">{this.state.dateTime}</p>
+                                    </div>
+                                    <div className="clearfix">
+                                    </div>
+                                    <p id="temp">{Math.round(this.props.current.temp)}
+                                        <span onClick={this.switchUnits} id="degrees">{this.props.info.measurement === "metric" ? "°C" : "°F"}</span>
+                                    </p>
+                                    <p id="feels">Feels like {Math.round(this.props.current.feels_like)}{this.props.info.measurement === "metric" ? "°C" : "°F"}</p>
+                                </section>
+                                <section className="info">
+                                    <p id="location">{this.props.location.city}, {this.props.location.countryName}</p>
+                                    <div className="details">
+                                        <section id="top">
+                                            <Property propertyId="humidity" iconImage={humidity} Text="Humidity" Value={`${this.props.current.humidity}%`} />
+                                            <Property propertyId="wind" iconImage={wind} Text="Wind speed" Value={this.props.info.measurement === `metric` ? `${Math.round(this.props.current.wind_speed * 3.6)}k/h` : `${Math.round(this.props.current.wind_speed)}mi/h`} />
+                                        </section>
+                                        <section id="bottom">
+                                            <Property propertyId="pressure" iconImage={pressure} Text="Pressure" Value={`${this.props.current.pressure}hPa`} />
+                                            <Property propertyId="visibility" iconImage={visibility} Text="Visibility" Value={`${(this.props.current.visibility / 1000)}km`} />
+                                        </section>
+                                    </div>
+                                </section>
+                                <div className="clearfix">
                                 </div>
-                            }
-                            <div className="date">
-                                <p id="day">{getDay(this.props.current.dt, false)}</p>
-                                <p id="date">{this.state.dateTime}</p>
+                            </header>
+                            <div className="hourly-forecast">
+                                <p className="title">Hourly Forecast</p>
+                                <div className="scroll-box">
+                                    {/*Hourly Forecast*/}
+                                    <div className="hourly-box-forecast">
+                                        {this.props.hourly.slice(0, 24).map(hour =>
+                                            <div key={hour.dt} className="hour-property">
+                                                <p className="time">{getTime(hour.dt)}</p>
+                                                <img src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <Chart Title="Temperature (°C)" Unit="temp" Values={this.props.hourly} LineColor="#EC6E4C" />
+                                    <Chart Title="Chance of Rain (%)" Unit="rain" Values={this.props.hourly} LineColor="#0074d9" />
+                                    <Chart Title="Wind Speed (km/h)" Unit="wind" Values={this.props.hourly} LineColor="#48484A" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="clearfix">
-                        </div>
-                        <div className="info">
-                            <p id="temp">{Math.round(this.props.current.temp)}
-                                <span onClick={this.switchUnits} id="degrees">{this.props.info.measurement === "metric" ? "°C" : "°F"}</span>
-                            </p>
-                            <p id="feels">Feels like {Math.round(this.props.current.feels_like)}{this.props.info.measurement === "metric" ? "°C" : "°F"}</p>
-                            <p id="location">{this.props.location.city}, {this.props.location.countryName}</p>
-                        </div>
-                        <div className="details">
-                            <Property propertyId="humidity" iconImage={humidity} Text="Humidity" Value={`${this.props.current.humidity}%`} />
-                            <Property propertyId="wind" iconImage={wind} Text="Wind speed" Value={this.props.info.measurement === `metric` ? `${Math.round(this.props.current.wind_speed * 3.6)}k/h` : `${Math.round(this.props.current.wind_speed)}mi/h`} />
-                            <Property propertyId="pressure" iconImage={pressure} Text="Pressure" Value={`${this.props.current.pressure}hPa`} />
-                            <Property propertyId="visibility" iconImage={visibility} Text="Visibility" Value={`${(this.props.current.visibility / 1000)}km`} />
-                        </div>
-
-                        <div className="hourly-forecast">
-                            <p className="title">Hourly Forecast</p>
-                            <div className="scroll-box">
-                                {/*Hourly Forecast*/}
-                                <div className="hourly-box-forecast">
-                                    {this.props.hourly.slice(0, 24).map(hour =>
-                                        <div key={hour.dt} className="hour-property">
-                                            <p className="time">{getTime(hour.dt)}</p>
-                                            <img src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="weather" />
+                            <div className="daily-forecast">
+                                <p className="title">Daily Forecast</p>
+                                {this.props.daily.length === 7 &&
+                                    this.props.daily.map(day =>
+                                        <div key={day.dt} className="day-property">
+                                            <p id="day-name-short" className="time">{getDay(day.dt, true)}</p>
+                                            <p id="day-name-large" className="time">{getDay(day.dt)}</p>
+                                            <div className="day-image">
+                                                <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} alt="weather" />
+                                            </div>
+                                            <div className="degrees-range">
+                                                <p className="degrees-max">{Math.round(day.temp.max)}°</p>
+                                                <p className="degrees-min">{Math.round(day.temp.min)}°</p>
+                                            </div>
                                         </div>
                                     )}
-                                </div>
-                                <Chart Title="Temperature (°C)" Unit="temp" Values={this.props.hourly} LineColor="#EC6E4C" />
-                                <Chart Title="Chance of Rain (%)" Unit="rain" Values={this.props.hourly} LineColor="#0074d9" />
-                                <Chart Title="Wind Speed (km/h)" Unit="wind" Values={this.props.hourly} LineColor="#48484A" />
                             </div>
-                        </div>
-                        <div className="daily-forecast">
-                            <p className="title">Daily Forecast</p>
-                            {this.props.daily.length === 7 &&
-                                this.props.daily.map(day =>
-                                    <div key={day.dt} className="day-property">
-                                        <p className="time">{getDay(day.dt, true)}</p>
-                                        <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} alt="weather" />
-                                        <p className="degrees-max">{Math.round(day.temp.max)}°</p>
-                                        <p className="degrees-min">{Math.round(day.temp.min)}°</p>
-                                    </div>
-                                )}
-                        </div>
-                        <div className="clearfix">
-                        </div>
+                            <div className="clearfix">
+                            </div>
+                        </section>
                         <footer>
-                            <p>Developed by Freddy Clavijo &copy; {this.state.dateTime.substr(7, 4)}</p>
+                            <p>&copy; {this.state.dateTime.substr(-4)} | Freddy Clavijo</p>
                         </footer>
                     </div >
                 </React.Fragment >

@@ -2,15 +2,15 @@ const getDay = (dt,isShort) => {
 
     var day = new Date(dt * 1000);
 
-    var monthNames = [];
+    var DayNames = [];
 
     if(isShort){
-        monthNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+        DayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     }else{
-        monthNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        DayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     } 
 
-    let formattedDay = monthNames[day.getDay()];
+    let formattedDay = DayNames[day.getDay()];
 
     return formattedDay;
 }
