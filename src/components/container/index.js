@@ -209,7 +209,7 @@ class Container extends Component {
                             </div>
                         </section>
                         <footer>
-                            <p>&copy; {this.state.dateTime.substr(-4)} | Freddy Clavijo</p>
+                            <p>&copy; {this.state.dateTime.substr(-4)} | Fredcoder</p>
                         </footer>
                     </div >
                 </React.Fragment >
